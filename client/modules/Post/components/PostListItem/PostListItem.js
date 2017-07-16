@@ -16,6 +16,9 @@ function PostListItem(props) {
       <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
       <p className={styles['post-desc']}>{props.post.content}</p>
       <p className={styles['post-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
+      <p className={styles['post-votes']}><FormattedMessage id="votes:" /> <span>{props.votes}</span></p>
+      <button className={styles['button-votes']}><a href="#" onClick={props.thumbUpComment}><FormattedMessage id="+" /></a></button>
+      <button className={styles['button-votes']}><a href="#" onClick={props.thumbsDownRequest}><FormattedMessage id="-" /></a></button>
       <hr className={styles.divider} />
     </div>
   );
@@ -29,7 +32,10 @@ PostListItem.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
+  votes: PropTypes.number.isRequired,
   onDelete: PropTypes.func.isRequired,
+  thumbUpComment: PropTypes.func.isRequired,
+  thumbsDownRequest: PropTypes.func.isRequired
 };
 
 export default PostListItem;

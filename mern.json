@@ -49,7 +49,7 @@
        {
       "name": "arrow-function-s",
       "description": "Generates a functional react component in shared components",
-      "usage": "functional-s [component-name]",
+      "usage": "arrow-function-s [component-name]",
       "files": [
         {
           "blueprint-path": "config/blueprints/arrow-function-s.ejs",
@@ -60,7 +60,7 @@
     {
       "name": "arrow-function-m",
       "description": "Generates a functional react component in a module directory",
-      "usage": "functional-m <module-name>/<component-name>",
+      "usage": "arrow-function-m <module-name>/<component-name>",
       "files": [
         {
           "blueprint-path": "config/blueprints/arrow-function-s.ejs",

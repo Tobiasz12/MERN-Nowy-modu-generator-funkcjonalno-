@@ -3,6 +3,18 @@
   padding: 15px;
   border-radius: 2px;
 }
+.post-votes{
+  margin: 5px;
+}
+.button-votes {
+  padding: 5px;
+  margin: 5px;
+}
+
+.button-votes a {
+  color: blue;
+  text-decoration: none;
+}
 
 .post-title{
   font-size: 28px;
