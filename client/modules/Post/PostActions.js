@@ -17,9 +17,13 @@ export function thumbUpComment(cuid) {
    };
 }
 
-export function thumbUpCommentRequest(cuid) {
+export function thumbUpCommentRequest(cuid, votes) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}`, 'increment').then(() => dispatch(thumbUpComment(cuid)));
+    return callApi(`posts/${cuid}`, 'put', {
+        post: {
+            votes: votes + 1
+        },
+    }).then(() => dispatch(thumbsDown(cuid)));
   };
 }
 
@@ -30,9 +34,13 @@ export function thumbsDown(cuid) {
    };
 }
 
-export function thumbsDownRequest(cuid) {
+export function thumbsDownRequest(cuid, votes) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}`, 'decrement').then(() => dispatch(thumbsDown(cuid)));
+    return callApi(`posts/${cuid}`, 'put', {
+        post: {
+            votes: votes - 1
+        },
+    }).then(() => dispatch(thumbsDown(cuid)));
   };
 }
 

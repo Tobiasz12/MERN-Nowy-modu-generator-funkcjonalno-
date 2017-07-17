@@ -10,9 +10,9 @@ import styles from './PostDetailPage.css';
 
 
 // Import Actions
-import { fetchPost, editPostRequest } from '../../PostActions';
 import { toggleEditPost } from '../../../App/AppActions';
 import { getShowEditPost } from '../../../App/AppReducer';
+import { fetchPost, editPostRequest, thumbUpCommentRequest, thumbsDownRequest } from '../../PostActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
@@ -21,7 +21,8 @@ export class PostDetailPage extends Component {
   state = {
     name: this.props.post.name,
     title: this.props.post.title,
-    content: this.props.post.content
+    content: this.props.post.content,
+    votes: 0
   };
 
   handleInputChange = (event) => {
@@ -44,7 +45,7 @@ handleEditPost = () => {
         <input placeholder={this.props.intl.messages.authorName} className={styles['form-field']} name="name" value={this.state.name} onChange={this.handleInputChange}/>
         <input placeholder={this.props.intl.messages.postTitle} className={styles['form-field']} name="title" value={this.state.title} onChange={this.handleInputChange}/>
         <textarea placeholder={this.props.intl.messages.postContent} className={styles['form-field']} name="content" value={this.state.content} onChange={this.handleInputChange}/>
-        <a className={styles['post-submit-button']} href="#" onClick={this.handleEditPost}><FormattedMessage id="submit" /></a>
+        <a className={styles['post-submit-button']} href="#" onClick={this.handleEditPost}><FormattedMessage id="submit" />elosa</a>
       </div>
     );
   };
@@ -55,6 +56,9 @@ handleEditPost = () => {
         <h3 className={styles['post-title']}>{this.props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {this.props.post.name}</p>
         <p className={styles['post-desc']}>{this.props.post.content}</p>
+        <p><span>Votes: {this.state.votes}</span></p>
+        <button className={styles['button']} onClick={() => this.props.thumbUpCommentRequest(this.props.post.votes)}>+</button>
+        <button className={styles['button']} onClick={() => this.props.thumbsDownRequest(this.props.post.votes)}>-</button>
       </div>
     );
   };
@@ -80,17 +84,12 @@ PostDetailPage.need = [params => {
   return fetchPost(params.cuid);
 }];
 
-// Retrieve data from store as props
-function mapStateToProps(state, props) {
-  return {
-    post: getPost(state, props.params.cuid),
-  };
-}
-
-function mapDispatchToProps(dispatch, props) {
+function mapDispatchToProps(dispatch, props, thumbUpCommentRequest, thumbsDownRequest) {
   return {
     toggleEditPost: () => dispatch(toggleEditPost()),
-    editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post))
+    editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post)),
+    thumbUpCommentRequest: (votes) => dispatch(thumbUpCommentRequest(props.params.cuid, votes)),
+    thumbsDownRequest: (votes) => dispatch(thumbsDownRequest(props.params.cuid, votes)),
   }
 }
 
@@ -108,6 +107,7 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired
   }).isRequired,
 };
 

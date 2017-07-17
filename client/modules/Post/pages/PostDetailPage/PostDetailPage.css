@@ -8,6 +8,11 @@
     float: right;
 }
 
+.button {
+  padding: 5px;
+  margin: 5px;
+}
+
 .form {
     display: none;
     background: #FAFAFA;

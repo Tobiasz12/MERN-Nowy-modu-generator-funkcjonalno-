@@ -29,12 +29,12 @@ const PostReducer = (state = initialState, action) => {
 
     case THUMB_UP_COMMENT :
       return {
-        data: state.data.map(post => post.cuid === action.cuid ? votes: comment.votes + 1 : post),
+        data: state.data.map(post => post.cuid === action.cuid ?  post.votes + 1 : post),
       };
 
     case THUMB_DOWN_COMMENT :
       return {
-        data: state.data.map(post => post.cuid === action.cuid ? votes: comment.votes - 1 : post),
+        data: state.data.map(post => post.cuid === action.cuid ?  post.votes - 1 : post),
       };
 
     default:
