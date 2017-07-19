@@ -36,8 +36,7 @@ export default function () {
 
     const post1 = new Post({ name: 'Admin', title: 'Hello MERN', slug: 'hello-mern', cuid: 'cikqgkv4q01ck7453ualdn3hd', content: content1 });
     const post2 = new Post({ name: 'Admin', title: 'Lorem Ipsum', slug: 'lorem-ipsum', cuid: 'cikqgkv4q01ck7453ualdn3hf', content: content2 });
-    const user = new User();
-    const address = new Address();
+    const address = new Post();
       address.name = req.user.name;
       address.title = req.user.title;
       address.content = req.user.content;
