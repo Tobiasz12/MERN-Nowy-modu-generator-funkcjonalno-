@@ -33,10 +33,10 @@ export class PostDetailPage extends Component {
     });
   };
 
-handleEditPost = () => {
-  this.props.toggleEditPost();
-  this.props.editPostRequest(this.state);
-};
+  handleEditPost = () => {
+    this.props.toggleEditPost();
+    this.props.editPostRequest(this.state);
+  };
 
   renderPostForm = () => {
     return (
@@ -56,7 +56,7 @@ handleEditPost = () => {
         <h3 className={styles['post-title']}>{this.props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {this.props.post.name}</p>
         <p className={styles['post-desc']}>{this.props.post.content}</p>
-        <p><span>Votes: {this.state.votes}</span></p>
+        <p><span>votes: {this.state.votes}</span></p>
         <button className={styles['button']} onClick={() => this.props.thumbUpCommentRequest(this.props.post.votes)}>+</button>
         <button className={styles['button']} onClick={() => this.props.thumbsDownRequest(this.props.post.votes)}>-</button>
       </div>
@@ -84,7 +84,7 @@ PostDetailPage.need = [params => {
   return fetchPost(params.cuid);
 }];
 
-function mapDispatchToProps(dispatch, props, thumbUpCommentRequest, thumbsDownRequest) {
+function mapDispatchToProps(dispatch, props, thumbUpCommentRequest, thumbsDownRequest,votes) {
   return {
     toggleEditPost: () => dispatch(toggleEditPost()),
     editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post)),
@@ -107,7 +107,6 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired
   }).isRequired,
 };
 

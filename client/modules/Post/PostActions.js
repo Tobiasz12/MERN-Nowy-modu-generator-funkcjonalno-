@@ -21,7 +21,7 @@ export function thumbUpCommentRequest(cuid, votes) {
   return (dispatch) => {
     return callApi(`posts/${cuid}`, 'put', {
         post: {
-            votes: votes + 1
+            votes: post.votes
         },
     }).then(() => dispatch(thumbsDown(cuid)));
   };
@@ -38,7 +38,7 @@ export function thumbsDownRequest(cuid, votes) {
   return (dispatch) => {
     return callApi(`posts/${cuid}`, 'put', {
         post: {
-            votes: votes - 1
+            votes: post.votes
         },
     }).then(() => dispatch(thumbsDown(cuid)));
   };

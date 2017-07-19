@@ -8,13 +8,11 @@ const PostReducer = (state = initialState, action) => {
     case ADD_POST :
       return {
         data: [action.post, ...state.data],
-        votes: 0
       };
 
     case ADD_POSTS :
       return {
         data: action.posts,
-        votes: 0
       };
 
     case DELETE_POST :
