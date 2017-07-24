@@ -36,22 +36,8 @@ export default function () {
 
     const post1 = new Post({ name: 'Admin', title: 'Hello MERN', slug: 'hello-mern', cuid: 'cikqgkv4q01ck7453ualdn3hd', content: content1 });
     const post2 = new Post({ name: 'Admin', title: 'Lorem Ipsum', slug: 'lorem-ipsum', cuid: 'cikqgkv4q01ck7453ualdn3hf', content: content2 });
-    const address = new Post();
-      address.name = req.user.name;
-      address.title = req.user.title;
-      address.content = req.user.content;
-      address.slug = req.user.slug;
-      address.cuid = req.user.cuid;
-      address.dateAdded = req.user.dateAdded;
-      address.save(function(err) {
-          if (err) {
-              console.log(err);
-          }
-          res.json('Address added to DB');
-      });
 
-
-    Post.create([post1, post2, user, address], (error) => {
+    Post.create([post1, post2], (error) => {
       if (!error) {
         // console.log('ready to go....');
       }

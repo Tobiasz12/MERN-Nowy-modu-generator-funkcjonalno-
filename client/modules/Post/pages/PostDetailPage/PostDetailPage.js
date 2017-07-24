@@ -22,7 +22,6 @@ export class PostDetailPage extends Component {
     name: this.props.post.name,
     title: this.props.post.title,
     content: this.props.post.content,
-    votes: 0
   };
 
   handleInputChange = (event) => {
@@ -56,7 +55,7 @@ export class PostDetailPage extends Component {
         <h3 className={styles['post-title']}>{this.props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {this.props.post.name}</p>
         <p className={styles['post-desc']}>{this.props.post.content}</p>
-        <p><span>votes: {this.state.votes}</span></p>
+        <p><span>votes: {this.props.post['__v']}</span></p>
         <button className={styles['button']} onClick={() => this.props.thumbUpCommentRequest(this.props.post.votes)}>+</button>
         <button className={styles['button']} onClick={() => this.props.thumbsDownRequest(this.props.post.votes)}>-</button>
       </div>
@@ -84,16 +83,17 @@ PostDetailPage.need = [params => {
   return fetchPost(params.cuid);
 }];
 
-function mapDispatchToProps(dispatch, props, thumbUpCommentRequest, thumbsDownRequest,votes) {
+function mapDispatchToProps(dispatch, props) {
   return {
     toggleEditPost: () => dispatch(toggleEditPost()),
     editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post)),
-    thumbUpCommentRequest: (votes) => dispatch(thumbUpCommentRequest(props.params.cuid, votes)),
-    thumbsDownRequest: (votes) => dispatch(thumbsDownRequest(props.params.cuid, votes)),
+    thumbUpCommentRequest: (votes) => dispatch(thumbUpCommentRequest(props.params.cuid)),
+    thumbsDownRequest: (votes) => dispatch(thumbsDownRequest(props.params.cuid)),
   }
 }
 
 function mapStateToProps(state, props) {
+  console.log(getPost(state, props.params.cuid))
   return {
     post: getPost(state, props.params.cuid),
     showEditPost: getShowEditPost(state)
